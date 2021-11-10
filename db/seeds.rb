@@ -367,3 +367,43 @@ puts us3.message
 
 puts "Tarea 25. Hecha"
 
+#Tarea 26: Obtenga todas las publicaciones asociadas al blog con el id 5 y quien dejó cada publicacion 
+
+bl5 = Blog.find(5)
+post = Post.where(blog: bl5)
+user = post.pluck(:user_id)
+puts User.where(id: user)
+
+puts "Tarea 26. Hecha"
+
+#Tarea 27: Obtenga todos los mensajes asociados al blog con id 5, junto con toda la información de los usuarios que dejaron los mensajes
+
+bl5 = Blog.find(5)
+posts = Post.where(blog: bl5)
+msgs = Message.where(post: posts)
+users = msgs.pluck(:user_id)
+puts User.where(id: users)
+
+puts "Tarea 27. Hecha"
+
+#Tarea 28: Obtenga toda la información de los usuarios que son propietarios del primer blog (haz que esto funicone conun simple Blog.first.pripietarios)
+
+owner = Blog.first.owner
+users = owners.pluck(:user_id)
+User.where(id: users).each do |t|
+puts "#{t.first_name} #{t.last_name} #{t.email_address}"
+end
+
+puts "Tarea 28. Hecha"
+
+#Tarea 29: Cambielo, es decir, el primer usuario ya no es el propietario del primer blog
+
+us1 = User.first
+usul = User.last
+bl1 = Blog.first
+own = Owner.where(user: us1, blog: bl1)
+own.update_all(user_id: usul.id)
+
+puts Owner.where(user: us1, blog: bl1).count
+
+puts "Tarea 29. Hecha"
