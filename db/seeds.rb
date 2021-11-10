@@ -309,3 +309,61 @@ end
 puts Message.where(user: us4).count
 puts "Tarea 20. Hecha"
 
+#Tarea 21 Cambie el propietario de la segunda publicación para que sea el segundo usuario
+
+#Captura al segundo Post en la varialbe po2(318)
+#Captura al ultimo usuario en la variable ulu (319)
+#Actualizar usuario (320)
+
+po2 = Post.all[1]
+puts "Antes => #{po2.user.first_name}"
+ulu = User.all.last
+po2.user = ulu
+po2.save
+puts "Despues => #{po2.user.first_name}"
+puts "Tarea 21. Hecha"
+
+#Tarea 22: Cambie el contenido de la segunda publicacion por algo diferente
+
+po2 = Post.all[1]
+po2.content = "Un nuevo contenido"
+po2.save
+
+puts po2.errors.full_messages
+puts "Content: #{po2.content}"
+puts "Tarea 22. Hecha"
+
+#Tarea 23: Obtenga todos los blog que son propiedad del tercer usuario (Haz que esto funcione con un simple Usuario.find(3)blogs)
+
+us3 = User.find(3)
+owners = us3.owner
+blog_ids = owners.pluck(:blog_id)
+#blog_id => [45, 3 ,23]
+blog = Blog.where(id: blog_ids)
+puts "Blog del usuario 3: #{blog}"
+puts "Tarea 23. Hecha"
+
+#Tarea 24: Obtena todas las publicaciones que fueron creadas por el tercer usuario
+#lineas 352 y 353 con belong_to
+
+us3 = User.find(3)
+puts us3.post
+
+#us3 = User.where(first_name: "Usuarios 3").first
+#puts Post.where(user:us3)
+
+puts "Tarea 24. Hecha"
+
+#Tarea 25: Obtenga todos los mensajes escritos por el tercer usuario.
+
+us3= User.find(3)
+puts us3.message
+
+#Con Belong_to
+
+#use3 = User.where(first_name: "Usuario 3").first
+
+#puts Message.where(user: us3)
+
+puts "Tarea 25. Hecha"
+
